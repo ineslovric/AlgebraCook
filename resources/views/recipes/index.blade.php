@@ -17,6 +17,13 @@
 						@foreach($recipes as $recipe)
 						<li class="list-group-item">
 							<a href="recipes/view/{{$recipe->id}}">{{$recipe->ime}}</a>
+							
+							<form action="/recipes/{{$recipe->id}}" method="POST">
+									{{csrf_field()}}
+									{{method_field('DELETE')}}
+									
+									<button>Izbriši recept</button>
+							</form>
 						</li>
 						@endforeach
 					</ul>

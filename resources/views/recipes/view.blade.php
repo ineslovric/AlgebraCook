@@ -23,6 +23,7 @@
 							@foreach($recipe->ingredients as $ingredient)
 							
 							<li class="list-group-item">{{$ingredient->name}}</li>
+
 							@endforeach
 						</ul>
 						<h4>Opis: </h4>
