@@ -24,29 +24,31 @@
     <nav class="navbar navbar-default">
         <div class="container">
             <div class="navbar-header">
+                <!-- Branding Image -->
                 <a class="navbar-brand" href="{{ url('/') }}">
                     AlgebraCook
                 </a>
             </div>
             <div class="collapse navbar-collapse" id="app-navbar-collapse">
-                <!-- Lijeva strana navbar: link na recepte -->
-				
-                <!-- Desna strana navbar -->
+                <!-- Left Side Of Navbar -->
+                <ul class="nav navbar-nav">
+                    <li><a href="{{ url('/recipes') }}">Recepti</a></li>
+                </ul>
+                <!-- Right Side Of Navbar -->
                 <ul class="nav navbar-nav navbar-right">
-                    <!-- Linkovi za Prijavu i Registraciju -->
+                    <!-- Authentication Links -->
                     @if (Auth::guest())
-                        <li>Prijava</li>
-                        <li>Registracija</li>
+                        <li><a href="{{ url('/login') }}">Prijava</a></li>
+                        <li><a href="{{ url('/register') }}">Registracija</a></li>
                     @else
                         <li class="dropdown">
-                            <!-- Dropdown menu za promjenu lozinke i odjavu -->
-							<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
                                 {{ Auth::user()->name }} <span class="caret"></span>
                             </a>
 
                             <ul class="dropdown-menu" role="menu">
-                                <li><i class="fa fa-btn fa-cog"></i>Profil</li>
-                                <li><i class="fa fa-btn fa-sign-out"></i>Odjava</li>
+                                <li><a href="{{ url('/profil') }}"><i class="fa fa-btn fa-cog"></i>Profil</a></li>
+                                <li><a href="{{ url('/logout') }}"><i class="fa fa-btn fa-sign-out"></i>Odjava</a></li>
                             </ul>
                         </li>
                     @endif
@@ -59,9 +61,13 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
     @yield('script')
-	
-    <!-- Ako ima grešaka stvoriti blok za ispis grešaka -->
-
+    @if (count($errors) > 0)
+            <ul>
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        @endif
 
 </body>
 </html>
